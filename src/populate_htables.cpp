@@ -17,7 +17,8 @@ vector<node> bfs_step(const vector<node> &frontier, const config &cfg,
 	for(int i = 0; i < frontier.size(); i++) {
 		int id = omp_get_thread_num();
 		if(frontier[i].is_leaf()) {
-			(*ans)[id].absorb(parse_file(frontier[i]));
+			if(frontier[i].pass_filters())
+				(*ans)[id].absorb(parse_file(frontier[i]));
 		} else {
 			vector<node> C = frontier[i].get_children();
 			temp[id].insert(temp[id].end(), C.begin(), C.end());

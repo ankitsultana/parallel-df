@@ -15,14 +15,15 @@ struct file_handler {
 		while(true) {
 			ch = fgetc(fptr);
 			if(ch == EOF) return "";
-			if(ch >= 'a' and ch <= 'z') break;
+			if(isalpha(ch)) break;
 		}
 		string res;
-		while(ch >= 'a' and ch <= 'z') {
+		while(isalpha(ch)) {
 			res.push_back(ch);
 			ch = fgetc(fptr);
 		}
 		// apply processing here
+		for(char &ch: res) ch = tolower(ch);
 		return res;
 	}
 	void open(string f_name) {

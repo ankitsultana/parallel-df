@@ -44,6 +44,9 @@ struct node {
 	}
 	string get_path() const { return path; }
 	bool is_leaf() const { return is_file; }
+	bool pass_filters() const {
+		return path.size() >= 4 and path.substr(path.size() - 4) == ".txt";
+	}
 private:
 	bool is_file;
 	string path;
